@@ -1,0 +1,20 @@
+{
+  "name": "getflixmovies",
+  "version": "1.0.0",
+  "description": "app tendence movies / courses platzi api-rest",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josebrusa/GetflixMovies.git"
+  },
+  "keywords": [],
+  "author": "Brusa jose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josebrusa/GetflixMovies/issues"
+  },
+  "homepage": "https://github.com/josebrusa/GetflixMovies#readme"
+}
