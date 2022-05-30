@@ -1,5 +1,5 @@
 // Section
-
+const titleHome = document.querySelector('#title__home');
 const headerSection = document.querySelector('#header');
 const trendingPreviewSection = document.querySelector('#trendingPreview');
 const categoriesPreviewSection = document.querySelector('#categoriesPreview');
