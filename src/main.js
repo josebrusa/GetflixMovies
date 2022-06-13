@@ -48,14 +48,24 @@ function createMovies(
                 : 'src', 'https://image.tmdb.org/t/p/w300'
                 + movie.poster_path);
 
+                
+        const movieBtn = document.createElement('button');
+        movieBtn.classList.add('movie-btn');
+        movieBtn.addEventListener('click', () => {
+            movieBtn.classList.toggle('movie-btn--liked');
+        });
+        
         if(lazyLoad){
             lazyLoader.observe(movieImg);
         }
 
         movieContainer.appendChild(movieImg);
+        movieContainer.appendChild(movieBtn);
         container.appendChild(movieContainer);
 
     });
+
+
 }
 
 function createCategories(categories, container){
@@ -95,7 +105,7 @@ async function getTrendingMoviesPreview() {
 async function getTrendingMovies() {
     const { data } = await api('trending/movie/day');
     const movies = data.results;
-
+    maxPages = data.total_pages;
     createMovies(movies, genericSection, {lazyLoad: true, clean: true});
 
     // const btnLoadMore = document.createElement('button');
@@ -105,16 +115,17 @@ async function getTrendingMovies() {
 } 
 
 async function getPaginatedTrendingMovies(){
-
+    
     const {
         scrollTop,
         scrollHeight,
         clientHeight
     } = document.documentElement;
 
-    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 35);
+    const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 25);
+    const pageIsNotMax = page < maxPages;
 
-    if(scrollIsBottom){
+    if(scrollIsBottom && pageIsNotMax){
             page++;
         const { data } = await api('trending/movie/day', {
             params: {
@@ -161,9 +172,35 @@ async function getMovieBySearch(query) {
         }
     });
     const movies = data.results;
-    
+    maxPages = data.total_pages
     createMovies(movies, genericSection);
 
+}
+
+function getPaginatedMovieBySearch(query) {
+    return async function (){
+        const {
+            scrollTop,
+            scrollHeight,
+            clientHeight
+        } = document.documentElement;
+
+        const scrollIsBottom = (scrollTop + clientHeight) >= (scrollHeight - 25);
+        const pageIsNotMax = page < maxPages;
+        
+            if(scrollIsBottom && pageIsNotMax){
+                page++;
+                const { data } = await api('search/movie', {
+                    params: {
+                        query,
+                        page,
+                    }
+                });
+                const movies = data.results;
+                
+                createMovies(movies, genericSection, { lazyLoad: true, clean: false});
+            }
+    }
 } 
 
 async function getMovieById(id){
