@@ -175,13 +175,20 @@ footer {
     right: 10px;
     width: 30px;
     height: 30px;
+    border-radius: 30px;
     padding: 0;
     margin: 0;
-    background: none;
-    border-radius: 50%;
-    border: 3px solid #3e0f64;
 }
 
+.movie-btn::before {
+    content: '🤍';
+    font-size: 15px;
+}
+
+.movie-btn--liked::before {
+    content: '❤️';
+    font-size: 15px;
+}
 .categoriesPreview-list,
 .categories-list {
     display: flex;

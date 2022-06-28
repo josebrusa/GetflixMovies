@@ -106,5 +106,5 @@ dist
 
 
 
-# Secret Api Key
-src/secretKey.js
+# # Secret Api Key
+# src/secretKey.js
